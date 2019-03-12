@@ -2,9 +2,6 @@ package com.domain;
 
 import java.io.Serializable;
 
-/**
- * Created by kitchie on 23/10/2017.
- */
 public class UserRoleKey implements Serializable {
 
     private Long userId;

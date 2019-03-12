@@ -32,7 +32,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.config.SecurityConstants.REALM_NAME;
 import static com.config.SecurityConstants.SECRET;
 
 @Configuration
@@ -96,7 +95,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").antMatchers(HttpMethod.POST, "/signup").antMatchers(HttpMethod.GET, "report/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").
+                antMatchers(HttpMethod.POST, "/user/register").
+                antMatchers(HttpMethod.GET, "report/**");
     }
 
     @Bean
@@ -127,4 +128,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
+
 }
