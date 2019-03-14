@@ -96,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").
-                antMatchers(HttpMethod.POST, "/user/register").
+                antMatchers(HttpMethod.POST, "/register").
                 antMatchers(HttpMethod.GET, "report/**");
     }
 
@@ -106,7 +106,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        //.allowedOrigins("http://localhost:4200")
                         .allowedMethods("PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("Access-Control-Allow-Origin")
                         .exposedHeaders("Access-Control-Allow-Origin")
@@ -120,7 +120,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");
+        //config.addAllowedOrigin("http://localhost:4200");
         config.setAllowedMethods(Arrays.asList("POST", "OPTIONS", "GET", "DELETE", "PUT"));
         config.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
         source.registerCorsConfiguration("/**", config);

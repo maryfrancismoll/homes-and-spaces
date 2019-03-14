@@ -1,20 +1,18 @@
 package com.controller;
 
-import com.domain.User;
 import com.model.Message;
 import com.model.UserModel;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.security.auth.login.AccountException;
 import javax.security.auth.login.AccountNotFoundException;
+import java.nio.file.AccessDeniedException;
 
 @RestController
 @RequestMapping("/user")
@@ -23,22 +21,21 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //register
-    @RequestMapping(method = RequestMethod.POST, value = "/register")
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity addUser(@RequestBody UserModel userModel){
+    public ResponseEntity<?> getUser(){
         try {
-            User user = userService.registerUser(userModel);
-            return new ResponseEntity(new Message("Account " + user.getUserName() + " created."), HttpStatus.CREATED);
+            UserModel user = userService.getUserDetails();
+            return new ResponseEntity(user, HttpStatus.CREATED);
+        }catch(AccessDeniedException e) {
+            e.printStackTrace();
+            return new ResponseEntity(new Message(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }catch(AccountNotFoundException e){
             e.printStackTrace();
-            return new ResponseEntity(new Message("There was a problem creating the user. Please try again later."), HttpStatus.INTERNAL_SERVER_ERROR);
-        }catch(AccountException e){
-            e.printStackTrace();
-            return new ResponseEntity(new Message("Account already exists."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("The user details cannot be retrieved, possibly not existing."), HttpStatus.INTERNAL_SERVER_ERROR);
         }catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity(new Message("Unable to register. Please try again. "), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(new Message("Unable to execute properly. Please try again. "), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

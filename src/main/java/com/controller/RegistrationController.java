@@ -1,0 +1,44 @@
+package com.controller;
+
+import com.domain.User;
+import com.model.Message;
+import com.model.UserModel;
+import com.service.RegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.security.auth.login.AccountException;
+import javax.security.auth.login.AccountNotFoundException;
+
+@RestController
+@RequestMapping("/register")
+public class RegistrationController {
+
+    @Autowired
+    RegistrationService registrationService;
+
+    //register
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity addUser(@RequestBody UserModel userModel){
+        try {
+            User user = registrationService.registerUser(userModel);
+            return new ResponseEntity(new Message("Account " + user.getUserName() + " created."), HttpStatus.CREATED);
+        }catch(AccountNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity(new Message("There was a problem creating the user. Please try again later."), HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch(AccountException e){
+            e.printStackTrace();
+            return new ResponseEntity(new Message("Account already exists."), HttpStatus.BAD_REQUEST);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(new Message("Unable to register. Please try again. "), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+}
