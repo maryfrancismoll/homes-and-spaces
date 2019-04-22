@@ -10,6 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Maps to the database table user_role
+ */
 @Entity
 @Table(name = "user_role")
 @IdClass(UserRoleKey.class)

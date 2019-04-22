@@ -8,6 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Maps to the database table user_information
+ */
 @Entity
 @Table(name = "user_information")
 public class UserInformation {

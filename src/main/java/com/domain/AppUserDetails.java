@@ -2,12 +2,18 @@ package com.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AppUserDetails extends User implements CustomUserDetails {
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Implements UserDetails, which is used by springframework in authentication
+ */
+public class AppUserDetails extends User implements UserDetails {
 
     public AppUserDetails(User user){
         super(user);
@@ -50,7 +56,4 @@ public class AppUserDetails extends User implements CustomUserDetails {
         return true;
     }
 
-    public Long getUserId(){
-        return this.getUserId();
-    }
 }

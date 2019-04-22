@@ -25,6 +25,11 @@ import static com.config.SecurityConstants.SCOPE_READ;
 import static com.config.SecurityConstants.SCOPE_WRITE;
 import static com.config.SecurityConstants.SECRET;
 
+
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ */
 @Configuration
 @EnableAuthorizationServer
 @EnableResourceServer
@@ -48,6 +53,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private ClientDetailsService clientDetailsService;
 
+    /**
+     * Description copied from interface: AuthorizationServerConfigurer
+     * Configure the ClientDetailsService, e.g. declaring individual clients and their properties.
+     * Note that password grant is not enabled (even if some clients are allowed it) unless an
+     * AuthenticationManager is supplied to the
+     * AuthorizationServerConfigurer.configure(AuthorizationServerEndpointsConfigurer).
+     * At least one client, or a fully formed custom ClientDetailsService must be declared or the server will not start.
+     *
+     * @param configurer
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
         configurer.inMemory().
@@ -59,6 +75,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 accessTokenValiditySeconds(EXPIRATION_TIME);
     }
 
+    /**
+     * Description copied from interface: AuthorizationServerConfigurer
+     * Configure the non-security features of the Authorization Server endpoints, like token store,
+     * token customizations, user approvals and grant types. You shouldn't need to do anything by default,
+     * unless you need password grants, in which case you need to provide an AuthenticationManager.
+     *
+     * @param endpoints
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();

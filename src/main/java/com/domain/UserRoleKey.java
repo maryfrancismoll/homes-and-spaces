@@ -2,6 +2,11 @@ package com.domain;
 
 import java.io.Serializable;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * The composite key of UserRole entity
+ */
 public class UserRoleKey implements Serializable {
 
     private Long userId;

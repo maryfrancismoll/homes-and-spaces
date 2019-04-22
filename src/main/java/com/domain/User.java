@@ -12,6 +12,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Maps to the database table user
+ */
 @Entity
 @Table(name = "user")
 public class User {

@@ -7,16 +7,21 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * This service class contains the methods that are used across all modules or controllers
+ */
 @Service
 @PreAuthorize("isAuthenticated()")
 public class CommonService {
 
-    public static final String ROLE_ADMIN = "ADMIN";
-    public static final String ROLE_USER = "USER";
-
+    /**
+     *
+     * @return Map<String, Object> token details
+     */
     public static Map<String, Object> getTokenDetails(){
         Map<String, Object> decodedDetails = new HashMap<>();
 
@@ -30,6 +35,10 @@ public class CommonService {
         return decodedDetails;
     }
 
+    /**
+     *
+     * @return Long id of logged in user
+     */
     public static Long getCurrentUserId(){
         Long userId = null;
 
@@ -41,14 +50,4 @@ public class CommonService {
         return userId;
     }
 
-    public static String getCurrentUserAuthorities(){
-        String authorities = "";
-
-        Map<String, Object> decodedDetails = getTokenDetails();
-        if(decodedDetails != null && decodedDetails.containsKey("authorities")){
-            authorities = ((List)decodedDetails.get("authorities")).get(0).toString();
-        }
-
-        return authorities;
-    }
 }

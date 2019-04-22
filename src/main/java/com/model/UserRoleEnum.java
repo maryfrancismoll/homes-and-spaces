@@ -1,5 +1,10 @@
 package com.model;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * enum contains the roles allowed in the app
+ */
 public enum UserRoleEnum {
 
     ADMIN(1L, "ADMIN"),

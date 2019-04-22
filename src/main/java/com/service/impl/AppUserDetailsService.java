@@ -19,6 +19,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ */
 @Component
 public class AppUserDetailsService implements UserDetailsService {
 
@@ -31,6 +35,9 @@ public class AppUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
+    /*
+        This method performs the check on the database if the user does exist or not
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(userName);

@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountNotFoundException;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * This service class contains the methods that are used across all modules or controllers
+ */
 @Service
 public class UserService {
 
@@ -19,6 +24,12 @@ public class UserService {
     @Autowired
     UserInformationRepository userInformationRepository;
 
+    /**
+     * This method is called by controller to get user details
+     *
+     * @return UserModel
+     * @throws Exception
+     */
     public UserModel getUserDetails() throws Exception{
         Long currentUserId = CommonService.getCurrentUserId();
 

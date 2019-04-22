@@ -6,6 +6,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Model holds information used for user registration
+ */
 public class UserModel {
 
     private Long id;

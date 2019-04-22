@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.security.auth.login.AccountException;
 import javax.security.auth.login.AccountNotFoundException;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Controller that handles the registration function
+ */
 @RestController
 @RequestMapping("/register")
 public class RegistrationController {
@@ -23,7 +28,12 @@ public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
 
-    //register
+    /**
+     * Method handles POST request for registration of users
+     * RequestBody is expecting object of type UserModel
+     *
+     * @return ResponseEntity
+     */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity addUser(@RequestBody UserModel userModel){

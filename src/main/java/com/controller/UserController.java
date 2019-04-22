@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.security.auth.login.AccountNotFoundException;
 import java.nio.file.AccessDeniedException;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Controller that handles functions related to users
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -21,6 +26,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     * Method gets the details of the currently-logged-in user
+     *
+     * @return ResponseEntity<?>
+     */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<?> getUser(){

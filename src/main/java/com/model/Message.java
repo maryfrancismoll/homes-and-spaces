@@ -1,5 +1,10 @@
 package com.model;
 
+/**
+ * @author Maryfrancis Remo Moll
+ *
+ * Model holds information used in displaying messages
+ */
 public class Message {
 
     private String message;
