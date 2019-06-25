@@ -4,6 +4,8 @@ import com.service.impl.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -24,7 +26,6 @@ import static com.config.SecurityConstants.RESOURCE_ID;
 import static com.config.SecurityConstants.SCOPE_READ;
 import static com.config.SecurityConstants.SCOPE_WRITE;
 import static com.config.SecurityConstants.SECRET;
-
 
 /**
  * @author Maryfrancis Remo Moll
@@ -66,9 +67,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         configurer.inMemory().
                 withClient(CLIENT_ID).
-                secret(SECRET).
+                secret(passwordEncoder.encode(SECRET)).
                 authorizedGrantTypes(GRANT_TYPE).
                 scopes(SCOPE_READ,SCOPE_WRITE).
                 resourceIds(RESOURCE_ID).
