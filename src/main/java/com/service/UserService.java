@@ -33,11 +33,11 @@ public class UserService {
     public UserModel getUserDetails() throws Exception{
         Long currentUserId = CommonService.getCurrentUserId();
 
-        UserInformation userInformation = userInformationRepository.findOne(currentUserId);
+        UserInformation userInformation = userInformationRepository.findById(currentUserId).get();
         if (userInformation == null || userInformation.getUserId() == null){
             throw new AccountNotFoundException("User not found.");
         }
-        User user = userRepository.findOne(userInformation.getUserId());
+        User user = userRepository.findById(userInformation.getUserId()).get();
         return new UserModel(user, userInformation, false);
     }
 }
