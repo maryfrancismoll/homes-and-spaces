@@ -1,0 +1,43 @@
+Register user:
+URL: <host>[:port]/register
+
+POST /register HTTP/1.1
+Host: localhost:9090
+Content-Type: application/json
+User-Agent: PostmanRuntime/7.15.0
+Accept: */*
+Cache-Control: no-cache
+Postman-Token: 5f3ab874-5731-408b-97f0-4a0f4aca2683,f360c637-6203-4fd0-8da7-2021d1cae1ba
+Host: localhost:9090
+accept-encoding: gzip, deflate
+content-length: 151
+Connection: keep-alive
+cache-control: no-cache
+
+{
+	"firstName" : "Kitchie",
+	"lastName" : "Moll",
+	"emailAddress" : "francismoll@gmail.com",
+	"userName" : "kitchiemoll",
+	"password" : "kitchiemoll"
+}
+
+
+Login:
+URL: <host>[:port]/oauth/token
+
+POST /oauth/token HTTP/1.1
+Host: localhost:9090
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50aWQ6YWJjZGVmZw==
+User-Agent: PostmanRuntime/7.15.0
+Accept: */*
+Cache-Control: no-cache
+Postman-Token: 4ecda88f-3cc3-4340-95fe-5e35b1e93340,2911ffc9-ea9e-4ef8-b0ba-63d7026876ec
+Host: localhost:9090
+accept-encoding: gzip, deflate
+content-length: 61
+Connection: keep-alive
+cache-control: no-cache
+
+grant_type=password&username=kitchiemoll&password=kitchiemoll
