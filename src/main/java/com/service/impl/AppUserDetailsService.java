@@ -39,11 +39,11 @@ public class AppUserDetailsService implements UserDetailsService {
         This method performs the check on the database if the user does exist or not
      */
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(userName);
+    public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
+        User user = userRepository.findByUserName(emailAddress);
 
         if(user == null) {
-            throw new UsernameNotFoundException(String.format("The username %s doesn't exist", userName));
+            throw new UsernameNotFoundException(String.format("The email address %s doesn't exist", emailAddress));
         }
 
         //get user's default company

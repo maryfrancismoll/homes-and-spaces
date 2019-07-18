@@ -29,10 +29,6 @@ public class UserModel {
 
     @NotNull
     @NotEmpty
-    private String userName;
-
-    @NotNull
-    @NotEmpty
     private String password;
 
     public UserModel(){}
@@ -42,7 +38,6 @@ public class UserModel {
         this.setFirstName(userInformation.getFirstName());
         this.setLastName(userInformation.getLastName());
         this.setEmailAddress(userInformation.getEmailAddress());
-        this.setUserName(user.getUserName());
         this.setPassword(showPassword ? user.getPassword() : "");
     }
 
@@ -86,11 +81,4 @@ public class UserModel {
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

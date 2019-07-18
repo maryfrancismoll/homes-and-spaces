@@ -44,7 +44,7 @@ public class RegistrationService {
      */
     public User registerUser(UserModel userModel) throws Exception{
 
-        User user = userRepository.findByUserName(userModel.getUserName());
+        User user = userRepository.findByUserName(userModel.getEmailAddress());
 
         if (user != null && user.getId() != null){
             throw new AccountException("User with that username already exists.");
@@ -52,7 +52,7 @@ public class RegistrationService {
 
         //save user first
         user = new User();
-        user.setUserName(userModel.getUserName());
+        user.setUserName(userModel.getEmailAddress());
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
 
         try{
@@ -68,11 +68,12 @@ public class RegistrationService {
             userInformation.setLastName(userModel.getLastName());
             userInformation.setEmailAddress(userModel.getEmailAddress());
 
-            userInformation = userInformationRepository.save(userInformation);
-            if (userInformation == null || userInformation.getUserId() == null){
+            try{
+                userInformation = userInformationRepository.save(userInformation);
+            }catch (Exception e){
                 // Delete user if saving user information failed
                 userRepository.delete(user);
-                throw new Exception();
+                throw e;
             }
 
             //save user role: default USER
