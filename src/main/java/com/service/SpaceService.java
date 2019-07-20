@@ -80,4 +80,19 @@ public class SpaceService {
 
         return successful;
     }
+
+    //delete space of given category
+    public boolean deleteSpaceByCategory(Integer categoryId){
+        boolean successful = false;
+
+        try{
+            spaceRepository.deleteByCategoryId(categoryId);
+            successful = true;
+
+        }finally{
+
+        }
+
+        return successful;
+    }
 }

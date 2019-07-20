@@ -8,4 +8,6 @@ import java.util.List;
 public interface SpaceRepository extends CrudRepository<Space, Integer> {
 
     List<Space> findByUserId(Long userId);
+
+    void deleteByCategoryId(Integer categoryId);
 }

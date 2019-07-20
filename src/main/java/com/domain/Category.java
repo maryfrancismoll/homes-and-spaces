@@ -9,7 +9,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -17,7 +17,7 @@ public class Category {
     @Column(name = "description")
     private String description;
 
-    public Category(Long id, String name, String description) {
+    public Category(Integer id, String name, String description) {
         this(name, description);
         this.id = id;
     }
@@ -30,11 +30,11 @@ public class Category {
     public Category() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
