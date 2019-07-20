@@ -33,6 +33,12 @@ public class SpaceController {
         return null;
     }
 
+    @GetMapping(value = "/user")
+    @ResponseBody
+    public List<Space> getUserSpaces(){
+        return spaceService.getAllUsersSpaces();
+    }
+
     @PostMapping
     @ResponseBody
     public ResponseEntity<Message> postNewSpace(@RequestBody Space space){
@@ -55,6 +61,27 @@ public class SpaceController {
     @PutMapping
     @ResponseBody
     public ResponseEntity<Message> updateSpace(@RequestBody Space space){
-        return null;
+        //set from value, if not set
+        if(space.getAvailableFrom() == null){
+            space.setAvailableFrom(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+        }
+
+        boolean isSuccessful = spaceService.updateSpace(space);
+        if(isSuccessful){
+            return new ResponseEntity(new Message("Successfully updated space."), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new Message("Failed to update space."), HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ResponseBody
+    public ResponseEntity<?> deleteSpace(@PathVariable Integer id){
+        boolean isSuccessful = spaceService.deleteSpace(id);
+        if(isSuccessful){
+            return new ResponseEntity(new Message("Successfully deleted space."), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(new Message("Failed to delete space. Please check if you are the creator of this space post."), HttpStatus.BAD_REQUEST);
     }
 }

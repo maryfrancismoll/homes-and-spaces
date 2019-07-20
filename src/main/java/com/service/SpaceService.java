@@ -41,9 +41,43 @@ public class SpaceService {
     }
 
     //get all spaces of user
-    public List<Space> getAllUsersSpaces(Long userId){
+    public List<Space> getAllUsersSpaces(){
+        Long userId = CommonService.getCurrentUserId();
+
         List<Space> spaceList = new ArrayList<>();
         spaceRepository.findByUserId(userId).forEach(space -> spaceList.add(space));
         return spaceList;
+    }
+
+    //update space
+    public boolean updateSpace(Space space){
+        boolean successful = false;
+        try{
+            space = spaceRepository.save(space);
+            successful = true;
+        }finally{
+
+        }
+
+        return successful;
+    }
+
+    //delete space
+    public boolean deleteSpace(Integer id){
+        boolean successful = false;
+
+        try{
+            //get space
+            Space space = spaceRepository.findById(id).get();
+            if(space != null && space.getUserId().equals(CommonService.getCurrentUserId())){
+                spaceRepository.delete(space);
+                successful = true;
+            }
+
+        }finally{
+
+        }
+
+        return successful;
     }
 }
