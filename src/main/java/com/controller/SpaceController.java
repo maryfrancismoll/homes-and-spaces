@@ -21,12 +21,6 @@ public class SpaceController {
     @Autowired
     SpaceService spaceService;
 
-    @GetMapping
-    @ResponseBody
-    public List<Space> getAllSpaces(){
-        return null;
-    }
-
     @GetMapping(value = "/{id}")
     @ResponseBody
     public ResponseEntity<?> getSpaceById(@PathVariable Integer id){

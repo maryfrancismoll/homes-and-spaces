@@ -10,4 +10,10 @@ public interface SpaceRepository extends CrudRepository<Space, Integer> {
     List<Space> findByUserId(Long userId);
 
     void deleteByCategoryId(Integer categoryId);
+
+    List<Space> findByCategoryId(Integer categoryId);
+
+    List<Space> findByIdNotIn(List<Integer> ids);
+
+    List<Space> findByIdNotInAndCategoryId(List<Integer> ids, Integer categoryId);
 }

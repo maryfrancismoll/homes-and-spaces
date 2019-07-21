@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests().
                     antMatchers(HttpMethod.OPTIONS, "/**").permitAll().
                     antMatchers("/auth/**").permitAll().
+                    antMatchers(HttpMethod.GET,"/book", "/category").permitAll().
                     anyRequest().authenticated().
                 and().httpBasic().realmName(SecurityConstants.REALM_NAME);
     }
@@ -100,7 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**").
                 antMatchers(HttpMethod.POST, "/register").
-                antMatchers(HttpMethod.GET, "report/**");
+                antMatchers(HttpMethod.GET, "/book", "/category");
     }
 
     @Bean
