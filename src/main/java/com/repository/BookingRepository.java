@@ -14,6 +14,7 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
     //@Query("SELECT spaceId FROM Booking WHERE from <= ?1 AND to >= ?2")
     @Query("select spaceId from Booking b " +
             "where (b.from <= ?1 and b.to >= ?1) " +
-            "or (b.from >= ?2 and b.to <= ?2)" )
+            "or (b.from >= ?2 and b.to <= ?2) " +
+            "or (b.from >= ?1 and b.to <= ?2)")
     List<Integer> findSpacesWithConflictingBookings(Timestamp start, Timestamp end);
 }
